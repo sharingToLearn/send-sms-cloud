@@ -1,6 +1,8 @@
 package com.shahbaz.rest.api.sendsms.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,10 +19,15 @@ import com.shahbaz.rest.api.sendsms.utils.Client;
 @RestController
 public class RestLayer {
 
-	@RequestMapping("/sms")
-	public String sendSMSRest() {
+	@RequestMapping(value = "/sms/client/{client}/msg/{msg}",
+			method = RequestMethod.GET)
+	public ResponseEntity<String> sendSMSRest(@PathVariable String client, @PathVariable String msg) {
 
-		return sendSms("DUMMY", "Hello");
+		String response =  sendSms(client, msg);
+		if(response.contains("FAILED")){
+			return new ResponseEntity<String>(HttpStatus.EXPECTATION_FAILED);
+		}
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	public String sendSms(String client, String message) {
