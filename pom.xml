@@ -18,7 +18,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>com.shahbaz.learning.Application</start-class>
+		<start-class>com.shahbaz.rest.api.sendsms.starter.App</start-class>
 		<java.version>1.7</java.version>
 	</properties>
 
